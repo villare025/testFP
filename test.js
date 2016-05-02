@@ -45,4 +45,6 @@ window.onload = hashTag();
 $(".active").click(setHash);
 $(".active").mouseenter(setHTML);
 $(".active").mouseleave(hashTag);
+$(".active").focus(setHTML);
+$(".blur").mouseleave(hashTag);
 });
