@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="test.js"></script>
+
+<style>
+a:focus, a:hover {
+  fill: pink;
+  stroke: red;
+  stroke-width: 1;
+}
+
+#Floor_select{
+	float: right;
+	margin-top: 40px;
+	margin-right: 5px;
+}
+
+.floor_divider{
+	vertical-align: 2px;
+}
+
+#Floor_select b{
+	font-size: 1.5em;
+}
+
+#Floor_select a{
+	font-size: 0.9em;
+	vertical-align: 2px;
+}
+
+#Floor_select a:link{
+	text-decoration: none;
+	color: #005A8C;
+}
+
+#Floor_select a:visited{
+	text-decoration: none;
+	color: #005A8C;
+}
+
+#Floor_select a:active{
+	text-decoration: none;
+	color: #CC6600;
+}
+
+#Floor_select a:hover{
+	text-decoration: none;
+	color: #CC6600;
+}
+
+#right_header{
+	float: left;
+	width: 280px;
+	height: 51px;
+	background: #fff;
+	border:1px solid #ccc;
+	margin-left: 10px;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+#content_wrapper{
+	width: 100%;
+	min-width: 1060px;
+}
+	
+#map_section{
+	padding-left: 10px;
+}	
+
+#room_info{
+	border:1px solid #ccc; 
+	width: 280px; /*Width of right column in pixels*/
+	background: #fff;
+	height: 450px;
+	float: left;
+	margin-left: 10px;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+svg {
+	  border:1px solid #ccc; 
+      width:70%; height:75%; background:#fff;
+	  float: left;
+	  margin-top: 10px;
+    }
+
+.room{
+	fill: #FF0000;
+	fill-opacity: 0.2;
+	stroke:#000;
+	stroke-width: 1;
+}
+
+.room:hover{
+	fill-opacity:0.8;
+}
+
+.room:target{
+	fill-opacity:0.8;
+}
+
+.room2{
+	fill: #FECCCC;
+	fill-opacity: 1.0;
+	stroke:#000;
+	stroke-width: 1;
+}
+
+.room2:hover{
+	fill: #FF0000;
+}
+
+.room2:target{
+	fill: #FF0000;
+}
+
+.helpdesk{
+	fill: #00FF00;
+	fill-opacity: 0.2;
+	stroke:#000;
+	stroke-width: 1;
+}
+
+.helpdesk:hover{
+	fill-opacity: 0.8;
+}
+
+.helpdesk:target{
+	fill-opacity: 0.8;
+}
+
+.utilroom path, .utilroom rect, .utilroom polygon{
+	fill: #AAAAAA;
+	stroke:#000;
+	stroke-width: 1;
+}
+
+.location{
+	fill: #0000FF;
+	fill-opacity: 0.2;
+	stroke:#000;
+	stroke-width: 1;
+}
+
+.location:hover{
+	fill-opacity: 0.8;
+}
+
+.location:target{
+	fill-opacity: 0.8;
+}
+
+.inactive{
+	fill: #FFFFFF;
+	stroke:#000;
+	stroke-width: 1;
+}
+
+text{
+	opacity: 1.0;
+	stroke: none;
+	fill: #333333;
+	cursor: default;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Test the damn SVG FLOOR</h1>
+
+<svg id="svg_map" width="900" height="510" viewBox="0 0 900 510" xmlns="http://www.w3.org/2000/svg" version="1.1">
+		<g id="first_floor_outline" stroke = "#000" stroke-width = "1" fill = "none">
+			<path d="M280, 310 L10, 310 L10, 10 L125, 10 L125, 25 L590, 25 L590, 10 L875, 10 
+			M875,10 S890,10 890,25 L890, 370 
+			M890, 370 S890,390 870,390 L870, 435 
+			M870, 435 S870,455 850,455 L610, 455 L610, 465 
+			M280, 310 S500,310 555, 490 
+			M555, 490 S610,520 610, 465" />
+			<path d="M870,390 L870,30 L840,30" />
+			<!--<path d="M622,330 L622,360" />-->
+			<path d="M410,240 L295,240 L280,310" />
+		</g>
+		
+		<g id="text">
+			<text x="769" y="350">Curriculum</text>
+			<text x="784" y="370">Center</text>
+			<!--<text x="635" y="427">Instruction</text>
+			<text x="650" y="444">Room</text>
+			<text x="633" y="317">ITS Help Desk</text>-->
+			<text x="95" y="185">125</text>
+			<text x="95" y="135">126</text>
+			<text x="164" y="218">Study</text>
+			<text x="163" y="234">Room</text>
+			<text x="517" y="270" transform="rotate(90 530,270)">Reference/Circ</text>
+			<text x="622" y="42">108</text>
+			<text x="659" y="42">107</text>
+            		<text x="695" y="375">103</text>
+            		<text x="658" y="440">102</text>
+            		<text x="617" y="440">101</text>
+			
+			<text x="266" y="204">Library Learning Center</text>
+		</g>
+		
+		
+		
+		<g id="circoffices" class="utilroom">
+			<a xlink:href="#0">
+				<path d="M 410,338 L410,240 L515,240 L515,370 L494,391 S460,358 410,338" style="fill:rgb(100,100,100);stroke-width:1;stroke:rgb(0,0,0)"/>
+			</a>
+		</g>
+		
+		<g id="stairwell" class="utilroom">
+			<path d="M555,490 S610,520 610,465 L610,380 L590,380 L532,438 S545,460 555,490" />
+		</g>
+		
+		<g id="elevator" class="utilroom">
+			<rect x="610" y="385" width="25" height="25" />
+			<path d="M618,405 L618,390 L614,396 M618,390 L622,396" />
+			<path d="M627,390 L627,405 L623,399 M627,405 L631,399" />
+		</g>
+		
+		<!--<g id="itshelpdesk" class="helpdesk active">
+			<rect x="622" y="290" width="125" height="40" style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)" />
+		</g>-->
+		
+		<g id="circdesk" class="helpdesk active">
+			<a xlink:href="#0">
+				<rect x="515" y="250" width="40" height="120"  />
+			</a>
+		</g>
+		
+		<!--<g id="classroom" class="room active">
+			<path d="M635,380 L747,380 L747,455 L610,455 L610,410 L635,410 L635,380" style="fill:rgb(255,0,255);stroke-width:1;stroke:rgb(0,0,0)" />
+		</g>-->
+		
+		<!--<g id="itsoffices" class="utilroom">
+			<path d="M747,330 L655,330 L655,380 L747,380 L747 330" style="fill:rgb(0,200,200);stroke-width:1;stroke:rgb(0,0,0)" />
+		</g>-->
+		
+		<g id="curriccenter" class="location active">
+			<a xlink:href="#0">
+				<path d="M870, 435 S870,455 850,455 L747,455 L747,330 L747,280 L870,280 "/>
+			</a>
+		</g>
+        
+        <g id="BL103" class="room active">
+			<a xlink:href="#0">
+				<rect x="692" y="355" width="55" height="100" />
+			</a>
+		</g>
+        
+        <g id="BL102" class="room active">
+			<a xlink:href="#0">
+				<rect x="651" y="410" width="41" height="45" />
+			</a>
+		</g>
+        
+        <g id="BL101" class="room active">
+			<a xlink:href="#0">
+				<rect x="610" y="410" width="41" height="45" />
+			</a>
+        </g>
+        
+        <g id="popularcurricbooks">
+			<a xlink:href="#0">
+				<rect x="737" y="300" width="10" height="55" />
+			</a>
+        </g>
+		
+		<g id="gallery" class="location active">
+			<a xlink:href="#0">
+				<polygon points="618,10 618,62 580,62 580,25 590,25 590,10" />
+			</a>
+		</g>
+		
+		<g id="BL108" class="room active">
+			<a xlink:href="#0">
+				<rect x="618" y="10" width="36" height="52" />
+			</a>
+		</g>
+		
+		<g id="BL107" class="room active">
+			<a xlink:href="#0">
+				<rect x="654" y="10" width="36" height="52" />
+			</a>
+		</g>
+		
+		<g id="womens1">
+			<a xlink:href="#0">
+				<rect style="fill:#AAAAAA; stroke:#000; stroke-width: 1;" x="690" y="10" width="40" height="62" />
+				<g transform="translate(695,25) scale(.25, .25)">
+					<path d="M107.969,123.645c8.156,0,14.773-6.594,14.773-14.75V14.871c0-8.156-6.617-14.758-14.773-14.758H13.945
+						c-8.148,0-14.758,6.602-14.758,14.758v94.023c0,8.156,6.609,14.75,14.758,14.75H107.969z"/>
+					<path style="fill:#FFFFFF;" d="M13.945,2.613c-6.758,0-12.25,5.5-12.25,12.258v94.023c0,6.766,5.492,12.258,12.25,12.258h94.023
+						c6.766,0,12.258-5.492,12.258-12.258V14.871c0-6.758-5.492-12.258-12.258-12.258H13.945z"/>
+					<path d="M68.383,29.848c5.797,0,9.953,4.773,10.828,7.375l7.109,23.375c1.414,5.016-4.984,7.109-6.5,2.211l-6.398-21.445h-3.688
+						L80.461,79.48H70.25v29.758c0,5.078-7.648,5.055-7.648,0v-29.93h-3.867v29.859c0,5.148-7.664,5.148-7.664,0V79.48H40.828
+						l10.594-38.117h-3.5l-6.398,21.508c-1.516,4.672-7.984,2.773-6.492-2.273l7.094-23.375c0.75-2.664,4.133-7.375,9.969-7.375H68.383z"/>
+					<path d="M60.68,28.09c4.547,0,8.273-3.711,8.273-8.273c0-4.594-3.727-8.305-8.273-8.305c-4.602,0-8.281,3.711-8.281,8.305
+						C52.398,24.379,56.078,28.09,60.68,28.09z"/>
+				</g>
+			</a>
+		</g>
+		
+		<g id="mens1">
+			<a xlink:href="#0">
+				<rect style="fill:#AAAAAA; stroke:#000; stroke-width: 1;" x="730" y="10" width="40" height="62" />
+				<g transform="translate(735,25) scale(.25, .25)">
+					<path d="M107.969,122.949c8.156,0,14.773-6.617,14.773-14.742V14.168c0-8.156-6.617-14.758-14.773-14.758H13.945
+						c-8.148,0-14.758,6.602-14.758,14.758v94.039c0,8.125,6.609,14.742,14.758,14.742H107.969z"/>
+					<path style="fill:#FFFFFF;" d="M13.945,1.91c-6.758,0-12.25,5.5-12.25,12.258v94.039c0,6.734,5.492,12.227,12.25,12.227h94.023
+						c6.766,0,12.258-5.492,12.258-12.227V14.168c0-6.758-5.492-12.258-12.258-12.258H13.945z"/>
+					<path d="M60.727,27.41c4.555,0,8.273-3.688,8.273-8.273c0-4.57-3.719-8.281-8.273-8.281c-4.57,0-8.281,3.711-8.281,8.281
+						C52.445,23.723,56.156,27.41,60.727,27.41z"/>
+					<path d="M49.484,107.762c0,2.562,2.086,4.664,4.648,4.664s4.648-2.102,4.648-4.664V68.793h3.898v38.969
+						c0,2.562,2.062,4.664,4.625,4.664s4.648-2.102,4.648-4.664l0.039-67.18h3.859v24.766c0,4.992,6.484,4.992,6.461,0V40.035
+						c0-5.492-4.25-10.867-10.688-10.867l-21.992-0.039c-5.859,0-10.578,4.812-10.578,10.758v25.461c0,4.938,6.531,4.938,6.531,0V40.582
+						h3.93L49.484,107.762z"/>
+				</g>
+			</a>
+		</g>
+		
+		<g id="utility1" class="utilroom">
+			<polygon points="770,10 845,10 845,52 810,52 810,72 770,72 770,10" />
+		</g>
+		
+		<g id="catoffices" class="utilroom">
+			<polygon points="10,10 125,10 125,100 80,100 80,205 135,205 135,215 155,215 155,240 205,240 205,310 10,310 10,10" />
+		</g>
+        
+        < g id="unisex">
+            <rect style="fill:#AAAAAA; stroke:#000; stroke-width: 1;" x="125" y="25" width="40" height="50" />
+		<g>
+			<g transform="translate(130.5,28) scale(.25,.37)">
+				<path style="fill:#FFFFFF; stroke:#000; stroke-width:2;" d="M13.945,1.91c-6.758,0-12.25,5.5-12.25,12.258v94.039c0,6.734,5.492,12.227,12.25,12.227h94.023
+					c6.766,0,12.258-5.492,12.258-12.227V14.168c0-6.758-5.492-12.258-12.258-12.258H13.945z"/>
+			</g>
+            		<!--Wheel Chair Symbol-->
+            		<g transform="translate(140,54) scale(.4, .4)">
+                		<line xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="3.8637" x1="12.958" y1="12.5" x2="18.958" y2="12.5"/>
+                		<polyline xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="3.8637" points="  26.458,32.834 24.087,21 18.521,21 "/>
+                		<circle xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="3.8637" cx="10.958" cy="4.5" r="3"/>
+                		<line xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="3.8637" x1="10.958" y1="7.5" x2="10.958" y2="16.917"/>
+                		<path xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="3.8637" d="  M11.041,17.917c2.729,0,9.542,1.729,9.542,9.542c0,5.268-4.271,9.541-9.542,9.541C5.772,37,1.5,32.727,1.5,27.459  C1.5,22.19,5.771,17.917,11.041,17.917z"/>
+                		<line xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="3.8637" x1="26.708" y1="33.25" x2="31.208" y2="33.25"/>
+            		</g>
+            		<!--Mens/Womens Symbol-->
+            		<g transform="translate(137,33) scale(.03, .03)">            
+                		<circle xmlns="http://www.w3.org/2000/svg" cx="130.95011" cy="46.58577" r="46.54521"/>
+                		<path xmlns="http://www.w3.org/2000/svg" d="M124.50539,388.15534V549.98933C124.26193,579.39154,80.494976,579.39154,80.108304,549.98933V388.15534H22.821751L84.404788,171.89962H74.379644L38.57554,295.0651C29.524278,322.30474,-7.3109962,311.27714,1.3392857,282.17574L41.43986,148.98509C46.051436,133.68965,65.32836,106.68061,98.726432,106.02037H128.80188H163.17384C195.6095,106.68061,214.96663,133.91881,220.46041,148.98509L260.56101,282.17574C268.69571,311.1339,232.15259,323.02082,223.32473,295.0651L187.52063,171.89962H176.06331L239.07855,388.15534H180.3598V549.98933C180.8181,579.39154,137.22302,579.2483,137.39487,549.98933V388.15534H124.50539z"/>
+                		<circle xmlns="http://www.w3.org/2000/svg" cx="511.90545" cy="46.58577" r="46.54521"/>
+                		<path xmlns="http://www.w3.org/2000/svg" d="M462.49589,106.02037C426.70613,106.02037,403.77713,137.00793,403.77713,167.60313V310.81886C403.44773,338.80318,443.74313,338.80318,443.87777,310.81886V179.06038H453.90289V542.82853C453.28133,580.80938,506.95025,579.72094,506.89297,542.82853V330.86906H515.48597V542.82853C516.18773,579.72094,570.13733,580.80938,569.90817,542.82853V179.06038H579.93333V310.81886C579.46073,339.01802,619.54701,339.01802,620.03389,310.81886V167.60313C619.46109,137.00793,595.67281,106.56889,559.88305,106.02037H462.49589z"/>
+                		<rect xmlns="http://www.w3.org/2000/svg" x="297.79132" y="5.7684445" width="52.996765" height="562.84003"/>
+            		</g>
+		</g>
+        </g>
+        
+        <g id="emergencystairs" class="utilroom">
+            <rect x="165" y="25" width="40" height="40"/>
+        </g>
+        
+        <g id="popularbooks">
+			<a xlink:href="#0">
+				<rect x="205" y="25" width="10" height="35"/>
+			</a>
+        </g>
+		
+		<!--<g id="dvd" class="location active">
+			<rect x="680" y="100" width="10" height="80" style="fill:rgb226, 255, 0);stroke-width:1;stroke:rgb(0,0,0)"/>
+			<rect x="700" y="100" width="10" height="80" style="fill:rgb(226, 255, 0);stroke-width:1;stroke:rgb(0,0,0)"/>
+			<rect x="720" y="100" width="10" height="80" style="fill:rgb(226, 255, 0);stroke-width:1;stroke:rgb(0,0,0)"/>
+		</g>-->
+        
+        <g id="dvd" class="location active">
+			<a xlink:href="#0">
+			<rect x="210" y="120" width="50" height="10" />
+			<rect x="290" y="120" width="50" height="10" />
+			<rect x="370" y="120" width="50" height="10" />
+            <rect x="450" y="120" width="50" height="10" />
+            <!--The following are the racks near BL107/108-->
+            <rect x="620" y="90" width="10" height="40" />
+            <rect x="640" y="120" width="50" height="10" />
+            <rect x="700" y="90" width="10" height="40" />
+            <rect x="720" y="120" width="50" height="10" />
+            <rect x="780" y="90" width="10" height="40" />
+			</a>
+		</g>
+        
+        <g id="populardvd">
+			<a xlink:href="#0">
+				<circle cx="600" cy="370" r="8" />
+			</a>
+        </g>
+        
+        <g id="graphicnovels">
+			<a xlink:href="#0">
+				<rect x="440" y="230" width="75" height="10" class="location active"/>
+			</a>
+        </g>
+        
+		<!--<rect id="popmags" x="760" y="100" width="10" height="80" class="location active" style="fill:rgb(0, 255, 20);stroke-width:1;stroke:rgb(0,0,0)"/>-->
+		
+		<!--<g id="BL127" class="room active">
+			<rect x="80" y="100" width="55" height="30" style="fill:rgb(104, 172, 109); stroke-width:1; stroke:rgb(0,0,0)"/>
+		</g>-->
+		
+		<!--<g id="ref" class="location active">
+			<rect x="600" y="150" width="25" height="25" />
+        </g>-->
+		
+		<!--<circle id="bests" class ="location active" cx="605" cy="220" r="8" style="fill:rgb(255, 0, 255);stroke-width:1;stroke:rgb(0,0,0)"/>-->
+		
+		<g id="leisure" class="location active">
+			<a xlink:href="#0">
+				<circle cx="830" cy="94" r="8" />
+				<circle cx="830" cy="118" r="8" />
+				<circle cx="830" cy="142" r="8" />
+				<!--<circle cx="745" cy="176" r="8" style="fill:rgb(122, 83, 167); stroke-width:1; stroke:rgb(0,0,0)"/>-->
+			</a>
+		</g>
+		
+		<!--<g id="newbooks" class="location active">
+			<rect x="600" y="100" width="25" height="25" style="fill:rgb(83, 106, 167);stroke-width:1;stroke:rgb(0,0,0)"/>
+		</g>-->
+		
+		<g id="BL126" class="room active">
+			<a xlink:href="#0">
+				<rect x="80" y="100" width="55" height="60" />
+			</a>
+		</g>
+		
+		<g id="BL125" class="room active">
+			<a xlink:href="#0">
+				<rect x="80" y="160" width="55" height="45" />
+			</a>
+		</g>
+		
+		<g id="glassroom" class="room active">
+			<a xlink:href="#0">
+				<rect x="155" y="200" width="60" height="40"/>
+			</a>
+		</g>
+		
+		<g id="learningcenter" class="room active">
+			<a xlink:href="#0">
+				<rect x="260" y="160" width="180" height="80" />
+			</a>
+		</g>
+		
+		<text x="437" y="270">Course</text>
+			<text x="422" y="290">Reserves &</text>
+			<text x="438" y="310">Offices</text>
+			<text x="305" y="280">Tim Horton's</text>
+			<text x="520" y="390">Enter/</text>
+			<text x="527" y="410">Exit</text>
+			<text x="690" y="200">Computers</text>
+			<text x="325" y="90">Open Seating</text>
+			<text x="555" y="445">Stairs</text>
+			<!--<text x="662" y="363">ITS Offices</text>-->
+			<text x="60" y="250">Storage &</text>
+			<text x="70" y="275">Offices</text>
+	</svg>
+	<section id="room_info" class="a">
+		<br>
+		Hover over or select a colored area for details about individual rooms and locations in the library.
+		<br>
+	</section>
+ 
+</body>
+</html>
